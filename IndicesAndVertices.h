@@ -52,7 +52,7 @@ struct Cube {
 
 struct Square {// eheh I could only do this :(
 private:
-	int ClonedTimes = 1;
+	int ClonedTimes = 0;
 	int LoopControl = 0;
 
 	// Please change these if needed! 
@@ -65,7 +65,7 @@ private:
 	// 2 = lock
 	// 3 = temporary use
 public:
-	int Squares = 1;
+	int Squares = 0;
 
 	const float CONSTVertices[VerticesSize] = {
 		-0.5f, 0.5f,// 0
@@ -75,17 +75,17 @@ public:
 	};
 
 	float Vertices[VerticesSize] = {
-		-0.5f, 0.5f,// 0
-		0.5f, 0.5f, // 1
-		0.5f, -0.5f,// 2
-		-0.5f, -0.5f// 3
+		//-0.5f, 0.5f,// 0
+		//0.5f, 0.5f, // 1
+		//0.5f, -0.5f,// 2
+		//-0.5f, -0.5f// 3
 
 		// Vertices[8+]
 	};
 
 	unsigned int Indices[IndicesSize] = {
-		0, 1, 2,
-		0, 2, 3
+		//0, 1, 2,
+		//0, 2, 3
 
 		// Indices[6+]
 	};
@@ -191,7 +191,7 @@ public:
 	 and after the Shader Program and the following shaders are declared. If not
 	 done so, it will not work! Don't put in the while loop.
 	*/
-	void Clone(float size, float Xpos, float Ypos, std::optional<int> index = std::nullopt) {
+	void New(float size, float Xpos, float Ypos, std::optional<int> index = std::nullopt) {
 		int tempClonedTimes = ClonedTimes;
 
 		if (index.has_value()) { ClonedTimes = index.value(); }
@@ -215,10 +215,10 @@ public:
 			for (int i = 8 * ClonedTimes; i < ClonedTimes * 8 + 8; ++i) {
 				int target = ClonedTimes * 8 + step;
 				if (i % 2 == 0) {
-					Vertices[i] = (Vertices[step] + Xpos) * size;
+					Vertices[i] = (CONSTVertices[step] + Xpos) * size;
 				}
 				else {
-					Vertices[i] = (Vertices[step] + Ypos) * size;
+					Vertices[i] = (CONSTVertices[step] + Ypos) * size;
 				}
 				++step;
 			}
